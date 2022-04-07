@@ -15,7 +15,7 @@
 		ResultSet rs = stmt.executeQuery("SELECT * FROM userinfo");
 		rs.next();
 		String[] str = {"ab","a","n"};
-		rs.getString("user_id")
+		rs.getString("user_id");
 		//out.println(rs.getString("user_id"));
     %>
     이런씩으로 메서드를.

@@ -22,12 +22,12 @@
 </head>
 <body>
 <%
-if(rs.next{})else{account does not exist}
+/* if(rs.next{})else{account does not exist}
 out.println(rsA.getString("user_id")+"\n"+
 		rsA.getString("user_pw")+"\n"+
 		rsA.getString("user_name")+"\n"+
 		rsA.getString("email"));
-%>
+%> */
 <c:if test="${rsA.next()}">
 ${rs.getString("user_id")}
 </c:if>

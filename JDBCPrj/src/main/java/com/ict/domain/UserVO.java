@@ -30,6 +30,18 @@ public class UserVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Override
+	public String toString() {
+		return "UserVO [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", email=" + email + "]";
+	}
+	
+	//A VO will return as a pointer, similarly to a enum or list. Therefore use a toString() method.
+	//A single VO should correspond to a single row in a table.
+	//Similarly, a single DAO should correspond to a single table in SQL.
+	//가공 = processed
+	
+	
+	
 	
 	
 }
