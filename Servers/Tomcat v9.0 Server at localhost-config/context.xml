@@ -26,4 +26,17 @@
     <!--
     <Manager pathname="" />
     -->
+    
+    <!-- url, resource, password for db -->
+    <Resource
+    	auth = "Container"
+    	driverClassName = "com.mysql.cj.jdbc.Driver"
+    	url = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC"
+    	username = "root"
+    	password = "qwe123"
+    	name = "jdbc/mysql"
+    	type = "javax.sql.DataSource"
+    	maxActive = "300"
+    	maxWait = "1000"
+    />
 </Context>

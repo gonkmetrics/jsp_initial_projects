@@ -1,3 +1,4 @@
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Types"%>
 <%@page import="java.sql.DriverManager"%>
@@ -19,47 +20,9 @@
     String formUserEmail = request.getParameter("userEmail");
     
     /* Check dupes */
-    String insertU = null;
-    PreparedStatement queryUser = con.prepareStatement("SELECT user_id, user_pw FROM userinfo WHERE user_id=?");
-	queryUser.setString(1, formUserId);
-	ResultSet rsUser = queryUser.executeQuery();
-	
-	if(rsUser.next()){
-		insertU = rsUser.getString("user_id");
-	}
-
-	
-    if(formUserId.equals(insertU)){
-    	session.setAttribute("id_dupe",true);
-    	response.sendRedirect("userJoinForm.jsp");
-    }else{
-    	session.removeAttribute("id_dupe");
-    	PreparedStatement createUser = con.prepareStatement("INSERT INTO userinfo VALUES (?,?,?,?)");
-    	createUser.setString(1, formUserId);
-    	createUser.setString(2, formUserPw);
-    	createUser.setString(3, formUserName);
-    	if(formUserEmail.equals("")){
-    		createUser.setObject(4, null, Types.VARCHAR);
-    	}else{
-    		createUser.setString(4, formUserEmail);
-    	}
-    	createUser.executeUpdate();
-    	boolean registered = true;
-    }
-    
-    /* Fetch DB info */
-	/* PreparedStatement createUser = con.prepareStatement("INSERT INTO userinfo VALUES (?,?,?,?)");
-	createUser.setString(1, formUserId);
-	createUser.setString(2, formUserPw);
-	createUser.setString(3, formUserName);
-	if(formUserEmail.equals("")){
-		createUser.setObject(4, null, Types.VARCHAR);
-	}else{
-		createUser.setString(4, formUserEmail);
-	}
-	createUser.executeUpdate();
-	boolean registered = true;
-	*/
+	UserDAO dao = UserDAO.getInstance();
+    dao.userJoin(formUserId, formUserPw, formUserName, formUserEmail);
+    response.sendRedirect("userLoginForm.jsp");
     %>
 <!DOCTYPE html>
 <html>

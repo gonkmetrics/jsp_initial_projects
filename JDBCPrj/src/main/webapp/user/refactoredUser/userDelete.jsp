@@ -1,3 +1,4 @@
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -13,11 +14,8 @@
     %>
 
     <%
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC","root","qwe123");
-	PreparedStatement deleteUser = con.prepareStatement("DELETE FROM userinfo WHERE user_id=?");
-	deleteUser.setString(1, (String)loggedIn);
-	deleteUser.executeUpdate();
+	UserDAO dao = UserDAO.getInstance();
+	dao.userDelete((String)loggedIn);
 	session.invalidate();
 	response.sendRedirect(redirectPage);
     }catch(Exception e){}
