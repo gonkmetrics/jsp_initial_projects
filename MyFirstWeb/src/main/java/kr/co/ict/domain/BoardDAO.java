@@ -62,5 +62,35 @@ public class BoardDAO {
 		}
 		return boardList;	
 	}
-
-}
+	
+	public BoardVO getBoardDetail(int bno){
+		Connection con = null;
+		PreparedStatement queryBoard = null;
+		ResultSet rsBoard = null;
+		BoardVO board = new BoardVO();
+		try {
+			con = ds.getConnection();
+			queryBoard = con.prepareStatement("SELECT * FROM boardTbl WHERE board_num=?");
+			queryBoard.setInt(1, bno);
+			rsBoard = queryBoard.executeQuery();
+			if (rsBoard.next() == true) {
+				board.setBoardNum(rsBoard.getInt("board_num"));
+				board.setTitle(rsBoard.getString("title"));
+				board.setContent(rsBoard.getString("content"));
+				board.setWriter(rsBoard.getString("writer"));
+				board.setBdate(rsBoard.getDate("bdate"));
+				board.setMdate(rsBoard.getDate("mdate"));
+				board.setHit(rsBoard.getInt("hit"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+			con.close();
+			queryBoard.close();
+			rsBoard.close();
+			}catch(Exception e) {}
+		}
+		return board;	
+		}
+	}
