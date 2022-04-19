@@ -13,17 +13,6 @@
 <div class="container">
 <h1 class="row justify-content-md-center">boardDetail 페이지</h1>
 <table class="table table-dark">
-<thead>
-<tr>
-<td>#</td>
-<td>제목</td>
-<td>내용</td>
-<td>글쓴이</td>
-<td>작성일B</td>
-<td>작성일M</td>
-<td>조회수</td>
-</tr>
-</thead>
 <tr>
 <td>Post Number: ${boardList.boardNum}</td>
 <td>Title: <input type="text" value="${boardList.title}"/></td>
