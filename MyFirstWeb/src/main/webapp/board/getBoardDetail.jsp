@@ -25,13 +25,13 @@
 </tr>
 </thead>
 <tr>
-<td>${boardList.getBoardNum()}</td>
-<td>${boardList.getTitle()}</td>
-<td>${boardList.getContent()}</td>
-<td>${boardList.getWriter()}</td>
-<td>${boardList.getBdate()}</td>
-<td>${boardList.getMdate()}</td>
-<td>${boardList.getHit()}</td>
+<td>Post Number: ${boardList.boardNum}</td>
+<td>Title: <input type="text" value="${boardList.title}"/></td>
+<td>Content: <textarea cols="40" rows="10">${boardList.content}</textarea></td>
+<td>Writer: <input type="text" value="${boardList.writer}"/></td>
+<td>Posted: ${boardList.bDate}</td>
+<td>Last Modified: ${boardList.mDate}</td>
+<td>Views: ${boardList.hit}</td>
 </tr>
 </table>
 </div>
