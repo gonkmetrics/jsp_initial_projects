@@ -34,13 +34,13 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement queryBoard = null;
 		ResultSet rsBoard = null;
-		List<BoardVO> boardList = new ArrayList<>();
+		List<BoardVO> boardListA = new ArrayList<>();
 		try {
 			con = ds.getConnection();
 			queryBoard = con.prepareStatement("SELECT * FROM boardTbl");
 			rsBoard = queryBoard.executeQuery();
-			BoardVO board = new BoardVO();
 			while (rsBoard.next()) {
+				BoardVO board = new BoardVO();
 				//System.out.println(rsBoard.getInt("board_num"));
 				board.setBoardNum(rsBoard.getInt("board_num"));
 				board.setTitle(rsBoard.getString("title"));
@@ -49,7 +49,7 @@ public class BoardDAO {
 				board.setBdate(rsBoard.getDate("bdate"));
 				board.setMdate(rsBoard.getDate("mdate"));
 				board.setHit(rsBoard.getInt("hit"));
-				boardList.add(board);
+				boardListA.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class BoardDAO {
 			rsBoard.close();
 			}catch(Exception e) {}
 		}
-		return boardList;	
+		return boardListA;	
 	}
 	
 	public BoardVO getBoardDetail(int bno){
@@ -92,5 +92,69 @@ public class BoardDAO {
 			}catch(Exception e) {}
 		}
 		return board;	
+		}
+
+
+	public void insertBoard(String title, String text, String author){
+		Connection con = null;
+		PreparedStatement queryBoard = null;
+		try {
+			con = ds.getConnection();
+			queryBoard = con.prepareStatement("INSERT INTO boardTbl(title, content, writer) VALUES (?, ?, ?)");
+			queryBoard.setString(1, title);
+			queryBoard.setString(2, text);
+			queryBoard.setString(3, author);
+			queryBoard.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+			con.close();
+			queryBoard.close();
+			}catch(Exception e) {}
+		}
+		return;
+		}
+
+	public void updateBoard(String title, String text, String author, int bno){
+		Connection con = null;
+		PreparedStatement queryBoard = null;
+		try {
+			con = ds.getConnection();
+			queryBoard = con.prepareStatement("UPDATE boardTbl SET title=?, content=?, writer=?, mdate=now() WHERE board_num=?");
+			queryBoard.setString(1, title);
+			queryBoard.setString(2, text);
+			queryBoard.setString(3, author);
+			queryBoard.setInt(4, bno);
+			//update time stamp
+			queryBoard.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+			con.close();
+			queryBoard.close();
+			}catch(Exception e) {}
+		}
+		return;
+		}
+	
+	public void deleteBoard(int bno){
+		Connection con = null;
+		PreparedStatement queryBoard = null;
+		try {
+			con = ds.getConnection();
+			queryBoard = con.prepareStatement("DELETE FROM boardTbl WHERE board_num=?");
+			queryBoard.setInt(1, bno);
+			queryBoard.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+			con.close();
+			queryBoard.close();
+			}catch(Exception e) {}
+		}
+		return;	
 		}
 	}

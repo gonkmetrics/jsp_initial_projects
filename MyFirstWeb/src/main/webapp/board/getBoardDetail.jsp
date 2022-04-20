@@ -18,9 +18,15 @@
 <td>Title: <input type="text" value="${boardList.title}"/></td>
 <td>Content: <textarea cols="40" rows="10">${boardList.content}</textarea></td>
 <td>Writer: <input type="text" value="${boardList.writer}"/></td>
-<td>Posted: ${boardList.bDate}</td>
-<td>Last Modified: ${boardList.mDate}</td>
+<td>Posted: ${boardList.getBdate()}</td>
+<td>Last Modified: ${boardList.getMdate()}</td>
 <td>Views: ${boardList.hit}</td>
+<td>Delete: 		
+	<form action="http://localhost:8080/MyFirstWeb/boardDelete" method="post">
+		<input type="hidden" name="bno" value="${boardList.boardNum}" /><br>
+		<input type="submit" value="삭제">
+	</form>
+</td>
 </tr>
 </table>
 </div>

@@ -22,6 +22,7 @@
 <td>작성일B</td>
 <td>작성일M</td>
 <td>조회수</td>
+<td>Delete?</td>
 </tr>
 </thead>
 <c:forEach items="${boardList}" var="board">
@@ -33,6 +34,12 @@
 <td>${board.getBdate()}</td>
 <td>${board.getMdate()}</td>
 <td>${board.getHit()}</td>
+<td>Delete: 		
+	<form action="http://localhost:8080/MyFirstWeb/boardDelete" method="post">
+		<input type="text" name="bno" value="${board.getBoardNum()}"/><br>
+		<input type="submit" value="Delete User"/>
+	</form>
+</td>
 </tr>
 </c:forEach>
 </table>
